@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crispy Cafe | क्रिस्पी कैफे | Muzaffarnagar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #c0392b;
+  --red-dark: #96281b;
+  --red-light: #e74c3c;
+  --gold: #f39c12;
+  --gold-light: #f1c40f;
+  --dark: #1a0a00;
+  --dark2: #2c1500;
+  --cream: #fdf6ec;
+  --cream2: #fff9f0;
+  --text: #3d1f00;
+  --muted: #8a6a50;
+  --white: #ffffff;
+  --border: rgba(192,57,43,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,10,0,0.97);backdrop-filter:blur(10px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:70px;border-bottom:2px solid var(--gold)}
+.logo-nav{display:flex;flex-direction:column;line-height:1.1}
+.logo-nav .en{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--gold);letter-spacing:1px}
+.logo-nav .hi{font-family:'Dancing Script',cursive;font-size:1rem;color:var(--red-light)}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a{color:rgba(255,255,255,0.82);text-decoration:none;font-size:0.78rem;font-weight:500;padding:6px 10px;border-radius:4px;transition:all .25s;text-transform:uppercase;letter-spacing:0.5px}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(243,156,18,0.1)}
+.nav-cta{background:var(--red)!important;color:#fff!important;border-radius:20px!important;padding:7px 18px!important}
+.nav-cta:hover{background:var(--red-dark)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:24px;height:2px;background:var(--gold);transition:all .3s;border-radius:2px}
+.mob-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(26,10,0,0.98);z-index:999;padding:20px;flex-direction:column;gap:4px}
+.mob-menu a{color:#fff;text-decoration:none;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.07);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.5px}
+.mob-menu a:hover{color:var(--gold)}
+
+/* PAGES */
+.page{display:none;min-height:100vh;padding-top:70px}
+.page.active{display:block}
+
+/* ===== HOME PAGE ===== */
+/* SLIDER */
+.slider{position:relative;height:calc(100vh - 70px);overflow:hidden;min-height:500px}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;display:flex;align-items:center;justify-content:center}
+.slide.active{opacity:1}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.35)}
+.slide-content{position:relative;z-index:2;text-align:center;padding:20px;max-width:800px}
+.slide-tag{display:inline-block;background:var(--gold);color:var(--dark);font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:18px}
+.slide-content h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,4.5rem);font-weight:900;color:#fff;line-height:1.1;text-shadow:0 2px 30px rgba(0,0,0,0.5);margin-bottom:8px}
+.slide-content h1 span{color:var(--gold)}
+.slide-content p{color:rgba(255,255,255,0.82);font-size:clamp(0.85rem,2vw,1.1rem);margin-bottom:28px;max-width:540px;margin-left:auto;margin-right:auto}
+.slide-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--red);color:#fff;border:none;padding:13px 30px;border-radius:30px;font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all .3s;letter-spacing:0.5px;text-transform:uppercase}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 25px rgba(192,57,43,0.4)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.6);padding:11px 28px;border-radius:30px;font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all .3s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.slide-dots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:all .3s}
+.dot.active{background:var(--gold);width:24px;border-radius:4px}
+.slide-arrows{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 20px;z-index:3}
+.arrow-btn{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.arrow-btn:hover{background:var(--red);border-color:var(--red)}
+
+/* RATING STRIP */
+.rating-strip{background:var(--dark);padding:18px 5%;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.rating-item{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.85)}
+.rating-item .icon{font-size:1.4rem}
+.rating-item .val{font-size:1.1rem;font-weight:700;color:var(--gold)}
+.rating-item .label{font-size:0.78rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.5px}
+.sep{width:1px;height:30px;background:rgba(255,255,255,0.12)}
+
+/* SECTIONS */
+.section{padding:70px 5%}
+.sec-label{font-size:0.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:var(--dark);line-height:1.2;margin-bottom:14px}
+.sec-title span{color:var(--red)}
+.sec-sub{color:var(--muted);font-size:0.95rem;line-height:1.7;max-width:520px}
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:2px;margin:16px 0}
+
+/* ABOUT HOME */
+.about-home{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img-wrap{position:relative}
+.about-img{width:100%;height:420px;object-fit:cover;border-radius:12px;background:linear-gradient(135deg,#c0392b 0%,#96281b 50%,#2c1500 100%);display:flex;align-items:center;justify-content:center;font-size:5rem}
+.about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--gold);color:var(--dark);width:100px;height:100px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;box-shadow:0 8px 25px rgba(243,156,18,0.4)}
+.about-badge .num{font-size:1.8rem;line-height:1}
+.about-badge .txt{font-size:0.62rem;text-transform:uppercase;letter-spacing:1px}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.feat-item{background:var(--white);border-radius:8px;padding:14px;border-left:3px solid var(--red);display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.feat-item .fi{font-size:1.4rem}
+.feat-item .ft{font-size:0.82rem;font-weight:600;color:var(--dark)}
+
+/* FEATURED MENU */
+.feat-menu{background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 100%)}
+.feat-menu .sec-title{color:#fff}
+.feat-menu .sec-sub{color:rgba(255,255,255,0.6)}
+.feat-menu .divider{background:linear-gradient(90deg,var(--gold),var(--red))}
+.menu-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.menu-card{background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);transition:all .3s;cursor:pointer}
+.menu-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 15px 35px rgba(0,0,0,0.3)}
+.mc-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:linear-gradient(135deg,rgba(192,57,43,0.3),rgba(243,156,18,0.1))}
+.mc-body{padding:16px}
+.mc-tag{font-size:0.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.mc-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:5px}
+.mc-desc{font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5;margin-bottom:12px}
+.mc-footer{display:flex;align-items:center;justify-content:space-between}
+.mc-price{font-size:1rem;font-weight:700;color:var(--gold)}
+.mc-btn{background:var(--red);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:0.75rem;cursor:pointer;font-weight:500;transition:background .2s}
+.mc-btn:hover{background:var(--red-dark)}
+
+/* REVIEWS HOME */
+.reviews-home{background:var(--cream2)}
+.review-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.rev-card{background:#fff;border-radius:12px;padding:22px;box-shadow:0 3px 15px rgba(0,0,0,0.06);border:1px solid var(--border);transition:all .3s}
+.rev-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.1)}
+.rev-stars{color:var(--gold);font-size:0.9rem;margin-bottom:10px}
+.rev-text{font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:14px;font-style:italic}
+.rev-author{font-size:0.82rem;font-weight:600;color:var(--dark)}
+.rev-date{font-size:0.72rem;color:var(--muted);margin-top:2px}
+
+/* INFO HOME */
+.info-home{background:var(--dark);color:#fff}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+.info-box{background:rgba(255,255,255,0.05);border-radius:10px;padding:24px;border:1px solid rgba(255,255,255,0.08);text-align:center}
+.info-box .ib-icon{font-size:2rem;margin-bottom:14px}
+.info-box h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);margin-bottom:10px}
+.info-box p{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.7}
+.info-box a{color:var(--red-light);text-decoration:none}
+.info-box a:hover{color:var(--gold)}
+
+/* ===== MENU PAGE ===== */
+.page-hero{height:260px;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 100%);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f39c12' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.page-hero h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:#fff;position:relative}
+.page-hero h2 span{color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,0.6);margin-top:10px;font-size:0.9rem;position:relative}
+
+.menu-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px;justify-content:center}
+.mf-btn{background:#fff;color:var(--muted);border:1px solid var(--border);padding:8px 20px;border-radius:25px;font-size:0.82rem;font-weight:500;cursor:pointer;transition:all .25s}
+.mf-btn.active,.mf-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.menu-section-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--dark);border-bottom:2px solid var(--red);padding-bottom:10px;margin:36px 0 20px;display:flex;align-items:center;gap:10px}
+.menu-items{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.menu-item{background:#fff;border-radius:10px;padding:16px;display:flex;gap:14px;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);border:1px solid var(--border);transition:all .25s}
+.menu-item:hover{border-color:var(--red);box-shadow:0 5px 18px rgba(192,57,43,0.1);transform:translateX(3px)}
+.mi-emoji{font-size:2.2rem;min-width:50px;text-align:center}
+.mi-info{flex:1}
+.mi-name{font-weight:600;font-size:0.95rem;color:var(--dark);margin-bottom:3px}
+.mi-desc{font-size:0.78rem;color:var(--muted);line-height:1.5}
+.mi-veg{display:inline-block;width:12px;height:12px;border:1.5px solid #27ae60;border-radius:2px;margin-right:5px;position:relative;vertical-align:middle}
+.mi-veg::after{content:'';position:absolute;top:2px;left:2px;right:2px;bottom:2px;background:#27ae60;border-radius:50%}
+.mi-nonveg{display:inline-block;width:12px;height:12px;border:1.5px solid var(--red);border-radius:2px;margin-right:5px;position:relative;vertical-align:middle}
+.mi-nonveg::after{content:'▲';position:absolute;top:-2px;left:0px;font-size:9px;color:var(--red);line-height:1}
+.mi-price{font-weight:700;color:var(--red);font-size:1rem;white-space:nowrap}
+.mi-order{background:var(--red);color:#fff;border:none;padding:5px 12px;border-radius:15px;font-size:0.72rem;cursor:pointer;margin-top:6px;font-weight:500;transition:background .2s}
+.mi-order:hover{background:var(--red-dark)}
+
+/* ===== BLOG PAGE ===== */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.blog-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 15px rgba(0,0,0,0.06);border:1px solid var(--border);transition:all .3s}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.1)}
+.bc-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:4rem}
+.bc-body{padding:20px}
+.bc-tag{font-size:0.68rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.bc-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--dark);margin-bottom:8px;line-height:1.4}
+.bc-desc{font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.bc-footer{display:flex;align-items:center;justify-content:space-between;font-size:0.75rem;color:var(--muted)}
+.bc-read{color:var(--red);font-weight:600;cursor:pointer}
+
+/* ===== GALLERY PAGE ===== */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:36px}
+.gal-item{border-radius:10px;overflow:hidden;cursor:pointer;transition:all .3s;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,var(--cream2),#fff);border:1px solid var(--border);position:relative}
+.gal-item:hover{transform:scale(1.03);box-shadow:0 8px 25px rgba(0,0,0,0.12)}
+.gal-item.tall{grid-row:span 2;aspect-ratio:unset;font-size:4rem}
+.gal-overlay{position:absolute;inset:0;background:rgba(26,10,0,0.7);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Poppins',sans-serif;font-size:0.8rem;font-weight:500}
+.gal-item:hover .gal-overlay{opacity:1}
+
+/* ===== CONTACT PAGE ===== */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;margin-top:40px}
+.contact-info h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--dark);margin-bottom:20px}
+.ci-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:22px;padding:16px;background:#fff;border-radius:10px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.ci-icon{font-size:1.5rem;min-width:40px;text-align:center}
+.ci-label{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:4px}
+.ci-val{font-size:0.9rem;color:var(--dark);font-weight:500}
+.ci-val a{color:var(--dark);text-decoration:none}
+.ci-val a:hover{color:var(--red)}
+.map-embed{border-radius:10px;overflow:hidden;border:1px solid var(--border);height:220px;background:linear-gradient(135deg,var(--cream2),#f0e8d8);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.85rem;margin-top:20px;text-align:center;padding:20px}
+
+/* FORMS */
+.form-card{background:#fff;border-radius:14px;padding:30px;box-shadow:0 5px 25px rgba(0,0,0,0.07);border:1px solid var(--border)}
+.form-card h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:22px;border-bottom:2px solid var(--red);padding-bottom:12px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:0.78rem;font-weight:600;color:var(--text);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Poppins',sans-serif;font-size:0.88rem;color:var(--text);background:#fff;outline:none;transition:border-color .25s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-submit{background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;border:none;width:100%;padding:13px;border-radius:30px;font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;letter-spacing:0.5px;transition:all .3s;text-transform:uppercase}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(192,57,43,0.35)}
+.wa-btn{background:#25d366;color:#fff;border:none;width:100%;padding:11px;border-radius:30px;font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .3s}
+.wa-btn:hover{background:#128c7e;transform:translateY(-2px)}
+.success-msg{display:none;background:#d4edda;color:#155724;padding:12px 18px;border-radius:8px;font-size:0.85rem;margin-top:14px;border:1px solid #c3e6cb}
+
+/* ===== ENQUIRY PAGE ===== */
+.enquiry-wrap{max-width:700px;margin:0 auto;padding:60px 5%}
+.enq-tabs{display:flex;background:#fff;border-radius:10px;padding:4px;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,0.06)}
+.enq-tab{flex:1;padding:10px;text-align:center;border-radius:8px;cursor:pointer;font-size:0.85rem;font-weight:500;color:var(--muted);transition:all .25s}
+.enq-tab.active{background:var(--red);color:#fff}
+
+/* ===== ORDER PAGE ===== */
+.order-layout{display:grid;grid-template-columns:1fr 380px;gap:30px;align-items:start;margin-top:30px}
+.order-items{background:#fff;border-radius:14px;padding:24px;box-shadow:0 3px 15px rgba(0,0,0,0.05);border:1px solid var(--border)}
+.order-items h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--dark);margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:12px}
+.oi-item{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)}
+.oi-emoji{font-size:1.8rem;min-width:44px;text-align:center}
+.oi-info{flex:1}
+.oi-name{font-weight:600;font-size:0.88rem;color:var(--dark)}
+.oi-price{font-size:0.8rem;color:var(--muted);margin-top:2px}
+.oi-qty{display:flex;align-items:center;gap:8px}
+.qty-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--dark);transition:all .2s}
+.qty-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.qty-num{font-size:0.9rem;font-weight:600;min-width:20px;text-align:center}
+.cart-box{background:#fff;border-radius:14px;padding:24px;box-shadow:0 3px 15px rgba(0,0,0,0.05);border:1px solid var(--border);position:sticky;top:90px}
+.cart-box h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--dark);margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:12px}
+.cart-empty{text-align:center;color:var(--muted);font-size:0.85rem;padding:20px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.05);font-size:0.82rem}
+.cart-item-name{color:var(--dark);font-weight:500}
+.cart-item-price{color:var(--red);font-weight:600}
+.cart-total{display:flex;justify-content:space-between;padding:14px 0 0;font-weight:700;font-size:1rem;color:var(--dark);border-top:2px solid var(--border);margin-top:10px}
+.cart-total span:last-child{color:var(--red)}
+
+/* FOOTER */
+footer{background:var(--dark);color:rgba(255,255,255,0.7);padding:50px 5% 24px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px}
+.foot-logo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--gold);margin-bottom:14px}
+.foot-logo span{display:block;font-family:'Dancing Script',cursive;font-size:1rem;color:var(--red-light)}
+.foot-desc{font-size:0.82rem;line-height:1.7;color:rgba(255,255,255,0.5)}
+.foot-col h4{color:#fff;font-size:0.88rem;font-weight:600;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+.foot-col ul{list-style:none}
+.foot-col ul li{margin-bottom:8px}
+.foot-col ul li a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.82rem;transition:color .2s;cursor:pointer}
+.foot-col ul li a:hover{color:var(--gold)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.foot-bottom p{font-size:0.78rem;color:rgba(255,255,255,0.35)}
+.foot-social{display:flex;gap:10px}
+.social-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:0.85rem;cursor:pointer;transition:background .25s;text-decoration:none;color:#fff}
+.social-btn:hover{background:var(--red)}
+
+/* FLOATING WA */
+.float-wa{position:fixed;bottom:24px;right:24px;z-index:999;background:#25d366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 5px 20px rgba(37,211,102,0.4);cursor:pointer;text-decoration:none;transition:all .3s}
+.float-wa:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,0.5)}
+
+/* UTILS */
+.text-center{text-align:center}
+.mt-4{margin-top:4px}
+.mt-8{margin-top:8px}
+.mb-0{margin-bottom:0!important}
+.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .about-home,.contact-grid,.order-layout{grid-template-columns:1fr}
+  .menu-cards,.review-cards,.blog-grid{grid-template-columns:1fr 1fr}
+  .info-grid,.foot-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:repeat(3,1fr)}
+  .menu-items{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .about-badge{right:10px}
+}
+@media(max-width:600px){
+  .menu-cards,.review-cards,.blog-grid,.gallery-grid{grid-template-columns:1fr}
+  .info-grid,.foot-grid{grid-template-columns:1fr}
+  .rating-strip{gap:18px}
+  .sep{display:none}
+  .daily-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-nav">
+    <span class="en">🍕 Crispy Cafe</span>
+    <span class="hi">क्रिस्पी कैफे</span>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active" onclick="showPage('home',this)">Home</a>
+    <a href="#" onclick="showPage('menu',this)">Menu</a>
+    <a href="#" onclick="showPage('blog',this)">Blog</a>
+    <a href="#" onclick="showPage('gallery',this)">Gallery</a>
+    <a href="#" onclick="showPage('contact',this)">Contact</a>
+    <a href="#" onclick="showPage('enquiry',this)">Send Enquiry</a>
+    <a href="#" class="nav-cta" onclick="showPage('order',this)">Order Now 🛵</a>
+  </div>
+  <div class="hamburger" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#" onclick="showPage('home',null);toggleMob()">🏠 Home</a>
+  <a href="#" onclick="showPage('menu',null);toggleMob()">🍕 Menu</a>
+  <a href="#" onclick="showPage('blog',null);toggleMob()">📝 Blog</a>
+  <a href="#" onclick="showPage('gallery',null);toggleMob()">📸 Gallery</a>
+  <a href="#" onclick="showPage('contact',null);toggleMob()">📍 Contact</a>
+  <a href="#" onclick="showPage('enquiry',null);toggleMob()">✉️ Send Enquiry</a>
+  <a href="#" onclick="showPage('order',null);toggleMob()">🛵 Order Now</a>
+</div>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active">
+
+  <!-- SLIDER -->
+  <div class="slider" id="mainSlider">
+    <!-- Slide 1 -->
+    <div class="slide active">
+      <div class="slide-bg" style="background:linear-gradient(135deg,#1a0a00,#3d1500,#6b1f1f);background-image:none"></div>
+      <div class="slide-content">
+        <span class="slide-tag">⭐ 4.5 Rating · 133 Reviews</span>
+        <h1>Muzaffarnagar's <span>Favourite</span> Pizza Spot</h1>
+        <p>Crispy crust, loaded toppings, unforgettable flavours — every bite tells a story worth sharing.</p>
+        <div class="slide-btns">
+          <button class="btn-primary" onclick="showPage('order',null)">Order Now 🛵</button>
+          <button class="btn-outline" onclick="showPage('menu',null)">View Menu</button>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="slide">
+      <div class="slide-bg" style="background:linear-gradient(135deg,#0d1b0a,#1a3015,#2d5020);background-image:none"></div>
+      <div class="slide-content">
+        <span class="slide-tag">🌿 Veg Specials Available</span>
+        <h1>Paneer Peppy <span>Pizza</span> — Try It!</h1>
+        <p>Fresh paneer, bell peppers, onions — tossed in our secret spiced sauce on a golden crispy base.</p>
+        <div class="slide-btns">
+          <button class="btn-primary" onclick="showPage('order',null)">Order Now 🛵</button>
+          <button class="btn-outline" onclick="showPage('menu',null)">Full Menu</button>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="slide">
+      <div class="slide-bg" style="background:linear-gradient(135deg,#1a0000,#2d0808,#4d1010);background-image:none"></div>
+      <div class="slide-content">
+        <span class="slide-tag">🧀 Cheese Lovers' Paradise</span>
+        <h1>Veggie Extravaganza — <span>Full Cheese</span> Loaded!</h1>
+        <p>Seven veggies, triple mozzarella, herb-infused sauce — our most iconic pizza experience.</p>
+        <div class="slide-btns">
+          <button class="btn-primary" onclick="showPage('order',null)">Order Now 🛵</button>
+          <button class="btn-outline" onclick="showPage('enquiry',null)">Book Table</button>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 4 -->
+    <div class="slide">
+      <div class="slide-bg" style="background:linear-gradient(135deg,#0a0d1a,#101528,#1a1f40);background-image:none"></div>
+      <div class="slide-content">
+        <span class="slide-tag">☕ Snacks & More</span>
+        <h1>Perfect <span>Cafe Vibes</span> Await You</h1>
+        <p>Great food, cozy ambiance, hygienic kitchen — the perfect hangout spot in Muzaffarnagar.</p>
+        <div class="slide-btns">
+          <button class="btn-primary" onclick="showPage('contact',null)">Find Us 📍</button>
+          <button class="btn-outline" onclick="showPage('gallery',null)">See Gallery</button>
+        </div>
+      </div>
+    </div>
+    <!-- Emojis overlay -->
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15rem;opacity:0.06;pointer-events:none;z-index:1">🍕</div>
+    <!-- Arrows -->
+    <div class="slide-arrows">
+      <button class="arrow-btn" onclick="prevSlide()">&#8592;</button>
+      <button class="arrow-btn" onclick="nextSlide()">&#8594;</button>
+    </div>
+    <!-- Dots -->
+    <div class="slide-dots" id="sliderDots"></div>
+  </div>
+
+  <!-- RATING STRIP -->
+  <div class="rating-strip">
+    <div class="rating-item"><span class="icon">⭐</span><div><div class="val">4.5 / 5</div><div class="label">Google Rating</div></div></div>
+    <div class="sep"></div>
+    <div class="rating-item"><span class="icon">💬</span><div><div class="val">133+</div><div class="label">Happy Reviews</div></div></div>
+    <div class="sep"></div>
+    <div class="rating-item"><span class="icon">🍕</span><div><div class="val">₹200–400</div><div class="label">Price Per Person</div></div></div>
+    <div class="sep"></div>
+    <div class="rating-item"><span class="icon">🕘</span><div><div class="val">9 AM – 10 PM</div><div class="label">Open Daily</div></div></div>
+    <div class="sep"></div>
+    <div class="rating-item"><span class="icon">📞</span><div><div class="val"><a href="tel:9634950165" style="color:var(--gold);text-decoration:none">9634950165</a></div><div class="label">Call to Order</div></div></div>
+  </div>
+
+  <!-- ABOUT HOME -->
+  <div class="section">
+    <div class="about-home">
+      <div class="about-img-wrap">
+        <div class="about-img">🍕</div>
+        <div class="about-badge"><div class="num">4.5⭐</div><div class="txt">133 Reviews</div></div>
+      </div>
+      <div>
+        <div class="sec-label">Our Story</div>
+        <h2 class="sec-title">Muzaffarnagar's Most <span>Loved</span> Cafe</h2>
+        <div class="divider"></div>
+        <p class="sec-sub">From the heart of Link Road, Adarsh Colony — Crispy Cafe has been serving joy on a plate. Our pizzas are made fresh, our ingredients are hygienic, and our service is always warm and fast. Whether you're a PHD lover or a Dominos fan — our guests say we beat them all!</p>
+        <div class="about-features">
+          <div class="feat-item"><span class="fi">🍕</span><span class="ft">Fresh Daily Dough</span></div>
+          <div class="feat-item"><span class="fi">🧀</span><span class="ft">Premium Mozzarella</span></div>
+          <div class="feat-item"><span class="fi">🌿</span><span class="ft">Hygienic Kitchen</span></div>
+          <div class="feat-item"><span class="fi">⚡</span><span class="ft">Fast Service</span></div>
+          <div class="feat-item"><span class="fi">🛵</span><span class="ft">Home Delivery</span></div>
+          <div class="feat-item"><span class="fi">🪑</span><span class="ft">Cozy Dine-In</span></div>
+        </div>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn-primary" onclick="showPage('menu',null)">Explore Menu</button>
+          <button style="background:transparent;color:var(--red);border:2px solid var(--red);padding:11px 24px;border-radius:30px;font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer" onclick="showPage('contact',null)">Visit Us 📍</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED MENU -->
+  <div class="section feat-menu">
+    <div class="text-center">
+      <div class="sec-label" style="color:var(--gold)">Our Specialities</div>
+      <h2 class="sec-title">Must-Try <span style="color:var(--gold)">Dishes</span></h2>
+      <div class="divider" style="margin:14px auto"></div>
+    </div>
+    <div class="menu-cards">
+      <div class="menu-card"><div class="mc-img">🍕</div><div class="mc-body"><div class="mc-tag">Bestseller</div><div class="mc-name">Paneer Peppy Pizza</div><div class="mc-desc">Spiced paneer, capsicum, onion on our signature crispy base with zesty tomato sauce</div><div class="mc-footer"><span class="mc-price">₹249</span><button class="mc-btn" onclick="showPage('order',null)">Add to Order</button></div></div></div>
+      <div class="menu-card"><div class="mc-img">🧀</div><div class="mc-body"><div class="mc-tag">Fan Favourite</div><div class="mc-name">Veggie Extravaganza</div><div class="mc-desc">Full cheese loaded — 7 veggies, triple mozzarella on a golden crispy crust</div><div class="mc-footer"><span class="mc-price">₹329</span><button class="mc-btn" onclick="showPage('order',null)">Add to Order</button></div></div></div>
+      <div class="menu-card"><div class="mc-img">🥪</div><div class="mc-body"><div class="mc-tag">Quick Snack</div><div class="mc-name">Crispy Club Sandwich</div><div class="mc-desc">Toasted bread, fresh veggies, creamy spread — perfect companion for tea time</div><div class="mc-footer"><span class="mc-price">₹129</span><button class="mc-btn" onclick="showPage('order',null)">Add to Order</button></div></div></div>
+    </div>
+    <div class="text-center" style="margin-top:30px"><button class="btn-outline" onclick="showPage('menu',null)">See Full Menu →</button></div>
+  </div>
+
+  <!-- REVIEWS HOME -->
+  <div class="section reviews-home">
+    <div class="text-center">
+      <div class="sec-label">What Guests Say</div>
+      <h2 class="sec-title">Real <span>Reviews</span>, Real Love</h2>
+      <div class="divider" style="margin:14px auto"></div>
+    </div>
+    <div class="review-cards">
+      <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Yummy pizza and much more snacks foods, nice interior, good and fast service!"</div><div class="rev-author">Anav Dahiya</div><div class="rev-date">4 years ago · 7 photos</div></div>
+      <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"We're pizza lovers and tried so many places. But I will always remember the taste of Crispy's pizza. PHD & Dominos lovers must try!"</div><div class="rev-author">Neha Suhag</div><div class="rev-date">4 years ago</div></div>
+      <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Hygienic environment with delicious food. A wonderful place to walk around and have some snacks. Really good experience!"</div><div class="rev-author">Shubham Gujjar</div><div class="rev-date">Local Guide · 2 years ago</div></div>
+    </div>
+  </div>
+
+  <!-- INFO HOME -->
+  <div class="section info-home">
+    <div class="text-center">
+      <div class="sec-label" style="color:var(--gold)">Find Us</div>
+      <h2 class="sec-title" style="color:#fff">Visit <span style="color:var(--gold)">Crispy Cafe</span></h2>
+      <div class="divider" style="margin:14px auto;background:linear-gradient(90deg,var(--gold),var(--red))"></div>
+    </div>
+    <div class="info-grid">
+      <div class="info-box"><div class="ib-icon">📍</div><h3>Location</h3><p>Link Road, Adarsh Colony<br>Opposite American Institute<br>Near IFFL, Muzaffarnagar<br>Uttar Pradesh 251001</p></div>
+      <div class="info-box"><div class="ib-icon">📞</div><h3>Call & WhatsApp</h3><p>Phone: <a href="tel:9634950165">9634950165</a><br>WhatsApp: <a href="https://wa.me/919634950165">9634950165</a><br>Email: <a href="mailto:Kaifsiddiqui28637@gmail.com">Kaifsiddiqui28637@gmail.com</a></p></div>
+      <div class="info-box"><div class="ib-icon">🕘</div><h3>Opening Hours</h3><p>Monday – Sunday<br>9:00 AM – 10:00 PM<br><br>Dine-in · Delivery · Drive-through</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MENU PAGE ==================== -->
+<div id="page-menu" class="page">
+  <div class="page-hero">
+    <div><h2>Our <span>Menu</span></h2><p>Fresh, crispy, and made with love — explore our full menu</p></div>
+  </div>
+  <div class="section" style="padding-top:40px">
+    <div class="menu-filter">
+      <button class="mf-btn active" onclick="filterMenu('all',this)">All Items</button>
+      <button class="mf-btn" onclick="filterMenu('pizza',this)">🍕 Pizza</button>
+      <button class="mf-btn" onclick="filterMenu('snacks',this)">🥪 Snacks</button>
+      <button class="mf-btn" onclick="filterMenu('drinks',this)">☕ Drinks</button>
+      <button class="mf-btn" onclick="filterMenu('dessert',this)">🍰 Desserts</button>
+    </div>
+
+    <div id="menu-pizza" class="menu-cat">
+      <div class="menu-section-title">🍕 Pizzas</div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-emoji">🍕</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Paneer Peppy Pizza</div><div class="mi-desc">Spiced paneer, capsicum, onion, jalapeños on crispy base</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹249</div></div>
+        <div class="menu-item"><div class="mi-emoji">🧀</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Veggie Extravaganza (Full)</div><div class="mi-desc">7 veggies, triple mozzarella, herb sauce — fully loaded!</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹329</div></div>
+        <div class="menu-item"><div class="mi-emoji">🍕</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Margherita Classic</div><div class="mi-desc">Tomato sauce, fresh mozzarella, basil on thin crispy crust</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹199</div></div>
+        <div class="menu-item"><div class="mi-emoji">🌶️</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Spicy Desi Pizza</div><div class="mi-desc">Indian spices, onion, tomato, green chilli — for spice lovers</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹269</div></div>
+        <div class="menu-item"><div class="mi-emoji">🧅</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Farm Delight Pizza</div><div class="mi-desc">Fresh farm veggies, double cheese, oregano drizzle</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹299</div></div>
+        <div class="menu-item"><div class="mi-emoji">🍕</div><div class="mi-info"><div class="mi-name"><span class="mi-nonveg"></span>Chicken Tikka Pizza</div><div class="mi-desc">Tandoori chicken tikka, red onion, capsicum, mint chutney</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹349</div></div>
+      </div>
+    </div>
+
+    <div id="menu-snacks" class="menu-cat">
+      <div class="menu-section-title">🥪 Snacks & Starters</div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-emoji">🥪</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Crispy Club Sandwich</div><div class="mi-desc">Toasted multigrain, fresh veggies, creamy spread, chips</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹129</div></div>
+        <div class="menu-item"><div class="mi-emoji">🌮</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Veg Wrap / Frankie</div><div class="mi-desc">Paneer filling, tangy chutney, crispy onion, rolled to perfection</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹109</div></div>
+        <div class="menu-item"><div class="mi-emoji">🍟</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Loaded French Fries</div><div class="mi-desc">Crispy fries with seasoning, cheese dip, chilli sauce</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹99</div></div>
+        <div class="menu-item"><div class="mi-emoji">🧆</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Paneer Tikka Starter</div><div class="mi-desc">Grilled marinated paneer cubes with mint chutney</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹179</div></div>
+      </div>
+    </div>
+
+    <div id="menu-drinks" class="menu-cat">
+      <div class="menu-section-title">☕ Beverages</div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-emoji">🧋</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Cold Coffee</div><div class="mi-desc">Chilled brewed coffee with milk foam and chocolate drizzle</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹89</div></div>
+        <div class="menu-item"><div class="mi-emoji">🥤</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Fresh Lime Soda</div><div class="mi-desc">Sweet or salty — refreshing lime squeezed soda</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹59</div></div>
+        <div class="menu-item"><div class="mi-emoji">🍹</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Mango Lassi</div><div class="mi-desc">Thick, creamy mango lassi made from fresh yoghurt</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹79</div></div>
+        <div class="menu-item"><div class="mi-emoji">☕</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Masala Chai</div><div class="mi-desc">Ginger, cardamom, cinnamon — the classic Indian brew</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹39</div></div>
+      </div>
+    </div>
+
+    <div id="menu-dessert" class="menu-cat">
+      <div class="menu-section-title">🍰 Desserts</div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-emoji">🍫</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Chocolate Lava Cake</div><div class="mi-desc">Warm dark chocolate cake with molten centre, served with vanilla ice cream</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹149</div></div>
+        <div class="menu-item"><div class="mi-emoji">🍨</div><div class="mi-info"><div class="mi-name"><span class="mi-veg"></span>Ice Cream Sundae</div><div class="mi-desc">Two scoops vanilla with hot fudge, whipped cream, cherry</div><button class="mi-order" onclick="showPage('order',null)">Add to Order</button></div><div class="mi-price">₹119</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BLOG PAGE ==================== -->
+<div id="page-blog" class="page">
+  <div class="page-hero"><div><h2>Our <span>Blog</span></h2><p>Stories, recipes, and food love from Crispy Cafe</p></div></div>
+  <div class="section" style="padding-top:40px">
+    <div class="blog-grid">
+      <div class="blog-card"><div class="bc-img" style="background:linear-gradient(135deg,#faeeda,#fce4b8)">🍕</div><div class="bc-body"><div class="bc-tag">Pizza Tips</div><div class="bc-title">The Secret Behind Our Crispy Pizza Base</div><div class="bc-desc">Ever wondered how we get that perfect crunch on every slice? It's all about the dough process, fermentation time, and our custom stone-bake technique...</div><div class="bc-footer"><span>May 2024</span><span class="bc-read">Read More →</span></div></div></div>
+      <div class="blog-card"><div class="bc-img" style="background:linear-gradient(135deg,#edf5e1,#c8e6a0)">🌿</div><div class="bc-body"><div class="bc-tag">Health & Food</div><div class="bc-title">Why We Only Use Fresh Vegetables Every Day</div><div class="bc-desc">At Crispy Cafe, we never compromise on freshness. Our suppliers deliver vegetables every morning, and we believe in a hygienic kitchen as our top promise...</div><div class="bc-footer"><span>Apr 2024</span><span class="bc-read">Read More →</span></div></div></div>
+      <div class="blog-card"><div class="bc-img" style="background:linear-gradient(135deg,#fde8e8,#f9c0c0)">🧀</div><div class="bc-body"><div class="bc-tag">New Launch</div><div class="bc-title">Introducing the Full Cheese Loaded Veggie Extravaganza</div><div class="bc-desc">Our most requested pizza is finally here — seven handpicked vegetables topped with triple mozzarella. It's not just a pizza, it's a celebration...</div><div class="bc-footer"><span>Mar 2024</span><span class="bc-read">Read More →</span></div></div></div>
+      <div class="blog-card"><div class="bc-img" style="background:linear-gradient(135deg,#e8e8fd,#c5c5f5)">☕</div><div class="bc-body"><div class="bc-tag">Cafe Life</div><div class="bc-title">What Makes Crispy Cafe the Best Hangout in Muzaffarnagar</div><div class="bc-desc">From the moment you walk in, the vibe is different. Warm interiors, fast service, and food that makes you keep coming back. Here's our story...</div><div class="bc-footer"><span>Feb 2024</span><span class="bc-read">Read More →</span></div></div></div>
+      <div class="blog-card"><div class="bc-img" style="background:linear-gradient(135deg,#fdf0d8,#f9d38a)">🌶️</div><div class="bc-body"><div class="bc-tag">Recipes</div><div class="bc-title">5 Spicy Toppings You Must Try on Your Next Pizza</div><div class="bc-desc">If you love heat, you'll love our desi spicy combos. We're sharing our top topping combinations that create the perfect spicy-savoury balance...</div><div class="bc-footer"><span>Jan 2024</span><span class="bc-read">Read More →</span></div></div></div>
+      <div class="blog-card"><div class="bc-img" style="background:linear-gradient(135deg,#e8f5e9,#a5d6a7)">🎉</div><div class="bc-body"><div class="bc-tag">Events</div><div class="bc-title">Celebrating Our First 100 Reviews on Google Maps!</div><div class="bc-desc">We crossed 100 Google reviews with an average of 4.5 stars — a milestone we couldn't have achieved without our amazing guests and their love...</div><div class="bc-footer"><span>Dec 2023</span><span class="bc-read">Read More →</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== GALLERY PAGE ==================== -->
+<div id="page-gallery" class="page">
+  <div class="page-hero"><div><h2>Our <span>Gallery</span></h2><p>A visual taste of Crispy Cafe's food, vibes, and memories</p></div></div>
+  <div class="section" style="padding-top:40px">
+    <div class="gallery-grid">
+      <div class="gal-item tall" style="background:linear-gradient(135deg,#faeeda,#fce4b8)">🍕<div class="gal-overlay">Paneer Peppy Pizza</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#fde8e8,#f9c0c0)">🧀<div class="gal-overlay">Cheese Loaded</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#edf5e1,#c8e6a0)">🥪<div class="gal-overlay">Club Sandwich</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#e8f5e9,#a5d6a7)">🍟<div class="gal-overlay">Loaded Fries</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#e8e8fd,#c5c5f5)">☕<div class="gal-overlay">Cold Coffee</div></div>
+      <div class="gal-item tall" style="background:linear-gradient(135deg,#fdf0d8,#f9d38a)">🌮<div class="gal-overlay">Veg Wrap</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#fce4e4,#f7b6b6)">🍫<div class="gal-overlay">Lava Cake</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#e8f4fd,#b3d9f5)">🍹<div class="gal-overlay">Mango Lassi</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#f5e6fd,#d4a8f5)">🧆<div class="gal-overlay">Paneer Tikka</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#fff9e8,#ffe7a0)">🍨<div class="gal-overlay">Ice Cream</div></div>
+      <div class="gal-item" style="background:linear-gradient(135deg,#e8fdf5,#a0f5d0)">🌶️<div class="gal-overlay">Spicy Desi Pizza</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CONTACT PAGE ==================== -->
+<div id="page-contact" class="page">
+  <div class="page-hero"><div><h2>Contact <span>Us</span></h2><p>We're always here — reach out any time!</p></div></div>
+  <div class="section" style="padding-top:40px">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <div class="ci-item"><div class="ci-icon">📍</div><div><div class="ci-label">Address</div><div class="ci-val">Link Road, Adarsh Colony, Opposite American Institute, Near IFFL, Muzaffarnagar, UP 251001</div></div></div>
+        <div class="ci-item"><div class="ci-icon">📞</div><div><div class="ci-label">Phone / WhatsApp</div><div class="ci-val"><a href="tel:9634950165">9634950165</a></div></div></div>
+        <div class="ci-item"><div class="ci-icon">✉️</div><div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:Kaifsiddiqui28637@gmail.com">Kaifsiddiqui28637@gmail.com</a></div></div></div>
+        <div class="ci-item"><div class="ci-icon">🕘</div><div><div class="ci-label">Opening Hours</div><div class="ci-val">Mon – Sun: 9:00 AM – 10:00 PM</div></div></div>
+        <div class="ci-item"><div class="ci-icon">⭐</div><div><div class="ci-label">Google Rating</div><div class="ci-val">4.5 Stars · 133 Reviews</div></div></div>
+        <div class="map-embed">📍 Link Road, Adarsh Colony, Muzaffarnagar<br><br><small>Open in Google Maps for directions →<br><a href="https://maps.google.com/?q=Crispy+Cafe+Muzaffarnagar" target="_blank" style="color:var(--red)">Get Directions</a></small></div>
+      </div>
+      <div>
+        <div class="form-card">
+          <h3>📬 Send a Message</h3>
+          <div class="form-row">
+            <div class="form-group"><label>Your Name</label><input type="text" id="cn-name" placeholder="Full name"></div>
+            <div class="form-group"><label>Phone</label><input type="tel" id="cn-phone" placeholder="Your number"></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" id="cn-email" placeholder="your@email.com"></div>
+          <div class="form-group"><label>Subject</label><select id="cn-subject"><option>General Inquiry</option><option>Table Reservation</option><option>Bulk Order / Catering</option><option>Feedback</option><option>Other</option></select></div>
+          <div class="form-group"><label>Message</label><textarea id="cn-msg" placeholder="Tell us how we can help..."></textarea></div>
+          <button class="form-submit" onclick="sendContact()">📧 Send Message</button>
+          <button class="wa-btn" onclick="sendWA()">💬 Chat on WhatsApp</button>
+          <div class="success-msg" id="contact-success">✅ Message sent! We'll get back to you within 24 hours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ENQUIRY PAGE ==================== -->
+<div id="page-enquiry" class="page">
+  <div class="page-hero"><div><h2>Send <span>Enquiry</span></h2><p>Book a table, enquire about catering, or just say hello</p></div></div>
+  <div class="enquiry-wrap">
+    <div class="enq-tabs">
+      <div class="enq-tab active" onclick="switchEnqTab('table',this)">🪑 Table Booking</div>
+      <div class="enq-tab" onclick="switchEnqTab('catering',this)">🍽️ Catering</div>
+      <div class="enq-tab" onclick="switchEnqTab('feedback',this)">⭐ Feedback</div>
+    </div>
+    <div class="form-card" id="enq-table">
+      <h3>🪑 Book a Table</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input type="text" id="et-name" placeholder="Full name"></div>
+        <div class="form-group"><label>Phone</label><input type="tel" id="et-phone" placeholder="WhatsApp number"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Date</label><input type="date" id="et-date"></div>
+        <div class="form-group"><label>Time</label><input type="time" id="et-time" value="13:00"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Number of Guests</label><select id="et-guests"><option>1–2 guests</option><option>3–4 guests</option><option>5–6 guests</option><option>7–10 guests</option><option>10+ guests</option></select></div>
+        <div class="form-group"><label>Occasion</label><select id="et-occ"><option>Casual Dining</option><option>Birthday</option><option>Anniversary</option><option>Date Night</option><option>Family Gathering</option><option>Other</option></select></div>
+      </div>
+      <div class="form-group"><label>Special Requests</label><textarea id="et-req" placeholder="Any dietary preferences or special requests..."></textarea></div>
+      <button class="form-submit" onclick="sendEnquiry('table')">📧 Send Booking Request</button>
+      <button class="wa-btn" onclick="sendWAEnquiry('table')">💬 Book via WhatsApp</button>
+      <div class="success-msg" id="enq-success">✅ Enquiry sent! We'll confirm your booking within a few hours.</div>
+    </div>
+    <div class="form-card" id="enq-catering" style="display:none">
+      <h3>🍽️ Catering Enquiry</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input type="text" id="ec-name" placeholder="Full name"></div>
+        <div class="form-group"><label>Phone</label><input type="tel" id="ec-phone" placeholder="Contact number"></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" id="ec-email" placeholder="your@email.com"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Event Date</label><input type="date" id="ec-date"></div>
+        <div class="form-group"><label>Number of Guests</label><input type="number" id="ec-guests" placeholder="e.g. 50" min="10"></div>
+      </div>
+      <div class="form-group"><label>Event Type</label><select id="ec-event"><option>Birthday Party</option><option>Wedding</option><option>Corporate Event</option><option>School/College Event</option><option>Other</option></select></div>
+      <div class="form-group"><label>Menu Preferences / Details</label><textarea id="ec-details" placeholder="Tell us what you're looking for..."></textarea></div>
+      <button class="form-submit" onclick="sendEnquiry('catering')">📧 Send Catering Request</button>
+      <button class="wa-btn" onclick="sendWAEnquiry('catering')">💬 Enquire via WhatsApp</button>
+    </div>
+    <div class="form-card" id="enq-feedback" style="display:none">
+      <h3>⭐ Share Your Feedback</h3>
+      <div class="form-group"><label>Name</label><input type="text" id="ef-name" placeholder="Your name"></div>
+      <div class="form-group"><label>How was your experience?</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:0.85rem"><input type="radio" name="efstar" value="5"> ⭐⭐⭐⭐⭐ Excellent</label>
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:0.85rem"><input type="radio" name="efstar" value="4"> ⭐⭐⭐⭐ Very Good</label>
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:0.85rem"><input type="radio" name="efstar" value="3"> ⭐⭐⭐ Good</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Your Feedback</label><textarea id="ef-text" placeholder="Tell us about your experience..."></textarea></div>
+      <button class="form-submit" onclick="sendEnquiry('feedback')">📧 Submit Feedback</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ORDER PAGE ==================== -->
+<div id="page-order" class="page">
+  <div class="page-hero"><div><h2>Order <span>Now</span> 🛵</h2><p>Choose your items and place your order via Email or WhatsApp</p></div></div>
+  <div class="section" style="padding-top:30px">
+    <div class="order-layout">
+      <div>
+        <div class="order-items">
+          <h3>🍕 Select Your Items</h3>
+          <div id="order-list"></div>
+        </div>
+        <div class="form-card" style="margin-top:20px">
+          <h3>📋 Your Details</h3>
+          <div class="form-row">
+            <div class="form-group"><label>Name</label><input type="text" id="ord-name" placeholder="Full name"></div>
+            <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" id="ord-phone" placeholder="9634950165"></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" id="ord-email" placeholder="your@email.com"></div>
+          <div class="form-group"><label>Delivery Address</label><textarea id="ord-addr" placeholder="Full delivery address or select Dine-In..." style="min-height:70px"></textarea></div>
+          <div class="form-row">
+            <div class="form-group"><label>Order Type</label><select id="ord-type"><option>Home Delivery</option><option>Dine-In</option><option>Takeaway</option></select></div>
+            <div class="form-group"><label>Payment</label><select id="ord-pay"><option>Cash on Delivery</option><option>UPI / Online</option></select></div>
+          </div>
+          <div class="form-group"><label>Special Instructions</label><textarea id="ord-notes" placeholder="Extra cheese, less spicy, etc..." style="min-height:60px"></textarea></div>
+          <button class="form-submit" onclick="placeOrderEmail()">📧 Place Order via Email</button>
+          <button class="wa-btn" onclick="placeOrderWA()">💬 Place Order via WhatsApp</button>
+          <div class="success-msg" id="order-success">✅ Order sent! We'll call you to confirm within 15 minutes.</div>
+        </div>
+      </div>
+      <div class="cart-box">
+        <h3>🛒 Your Cart</h3>
+        <div id="cart-display"><div class="cart-empty">No items added yet. Select from the menu!</div></div>
+        <div id="cart-total-row" style="display:none" class="cart-total"><span>Total</span><span id="cart-total-val">₹0</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-logo">Crispy Cafe<span>क्रिस्पी कैफे</span></div>
+      <p class="foot-desc">Muzaffarnagar's most loved pizza cafe — fresh ingredients, crispy crusts, and heartwarming service since day one.</p>
+      <div style="margin-top:16px;font-size:0.82rem;color:rgba(255,255,255,0.5)">📞 <a href="tel:9634950165" style="color:rgba(255,255,255,0.7);text-decoration:none">9634950165</a></div>
+      <div style="margin-top:4px;font-size:0.82rem;color:rgba(255,255,255,0.5)">✉️ <a href="mailto:Kaifsiddiqui28637@gmail.com" style="color:rgba(255,255,255,0.7);text-decoration:none">Kaifsiddiqui28637@gmail.com</a></div>
+    </div>
+    <div class="foot-col"><h4>Pages</h4><ul>
+      <li><a onclick="showPage('home',null)">Home</a></li>
+      <li><a onclick="showPage('menu',null)">Menu</a></li>
+      <li><a onclick="showPage('blog',null)">Blog</a></li>
+      <li><a onclick="showPage('gallery',null)">Gallery</a></li>
+    </ul></div>
+    <div class="foot-col"><h4>Quick Links</h4><ul>
+      <li><a onclick="showPage('order',null)">Order Now</a></li>
+      <li><a onclick="showPage('enquiry',null)">Book Table</a></li>
+      <li><a onclick="showPage('contact',null)">Contact Us</a></li>
+      <li><a onclick="showPage('enquiry',null)">Send Enquiry</a></li>
+    </ul></div>
+    <div class="foot-col"><h4>Find Us</h4><ul>
+      <li><a>Link Road, Adarsh Colony</a></li>
+      <li><a>Muzaffarnagar, UP 251001</a></li>
+      <li><a>Mon–Sun: 9AM – 10PM</a></li>
+      <li><a>⭐ 4.5 · 133 Reviews</a></li>
+    </ul></div>
+  </div>
+  <div class="foot-bottom">
+    <p>© 2024 Crispy Cafe, Muzaffarnagar. All rights reserved.</p>
+    <div class="foot-social">
+      <a class="social-btn" href="https://wa.me/919634950165" target="_blank">💬</a>
+      <a class="social-btn" href="mailto:Kaifsiddiqui28637@gmail.com">✉️</a>
+      <a class="social-btn" href="tel:9634950165">📞</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a class="float-wa" href="https://wa.me/919634950165?text=Hi%20Crispy%20Cafe!%20I%20want%20to%20order." target="_blank" title="Order on WhatsApp">💬</a>
+
+<script>
+// ===== PAGE NAVIGATION =====
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'order') renderOrderList();
+}
+
+// ===== MOBILE MENU =====
+function toggleMob() {
+  const m = document.getElementById('mobMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// ===== SLIDER =====
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('sliderDots');
+let curSlide = 0, sliderTimer;
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goSlide(i);
+  dotsEl.appendChild(d);
+});
+
+function goSlide(n) {
+  slides[curSlide].classList.remove('active');
+  dotsEl.children[curSlide].classList.remove('active');
+  curSlide = (n + slides.length) % slides.length;
+  slides[curSlide].classList.add('active');
+  dotsEl.children[curSlide].classList.add('active');
+  resetTimer();
+}
+function nextSlide() { goSlide(curSlide + 1); }
+function prevSlide() { goSlide(curSlide - 1); }
+function resetTimer() {
+  clearInterval(sliderTimer);
+  sliderTimer = setInterval(nextSlide, 3000);
+}
+resetTimer();
+
+// ===== MENU FILTER =====
+function filterMenu(cat, btn) {
+  document.querySelectorAll('.mf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.menu-cat').forEach(c => {
+    c.style.display = (cat === 'all' || c.id === 'menu-' + cat) ? 'block' : 'none';
+  });
+}
+
+// ===== ENQUIRY TABS =====
+function switchEnqTab(tab, el) {
+  document.querySelectorAll('.enq-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  ['table','catering','feedback'].forEach(t => {
+    document.getElementById('enq-' + t).style.display = t === tab ? 'block' : 'none';
+  });
+}
+
+// ===== ORDER SYSTEM =====
+const menuItems = [
+  {emoji:'🍕', name:'Paneer Peppy Pizza', price:249, cat:'pizza'},
+  {emoji:'🧀', name:'Veggie Extravaganza', price:329, cat:'pizza'},
+  {emoji:'🍕', name:'Margherita Classic', price:199, cat:'pizza'},
+  {emoji:'🌶️', name:'Spicy Desi Pizza', price:269, cat:'pizza'},
+  {emoji:'🍕', name:'Farm Delight Pizza', price:299, cat:'pizza'},
+  {emoji:'🍕', name:'Chicken Tikka Pizza', price:349, cat:'pizza'},
+  {emoji:'🥪', name:'Crispy Club Sandwich', price:129, cat:'snacks'},
+  {emoji:'🌮', name:'Veg Wrap / Frankie', price:109, cat:'snacks'},
+  {emoji:'🍟', name:'Loaded French Fries', price:99, cat:'snacks'},
+  {emoji:'🧆', name:'Paneer Tikka Starter', price:179, cat:'snacks'},
+  {emoji:'🧋', name:'Cold Coffee', price:89, cat:'drinks'},
+  {emoji:'🥤', name:'Fresh Lime Soda', price:59, cat:'drinks'},
+  {emoji:'🍹', name:'Mango Lassi', price:79, cat:'drinks'},
+  {emoji:'☕', name:'Masala Chai', price:39, cat:'drinks'},
+  {emoji:'🍫', name:'Chocolate Lava Cake', price:149, cat:'dessert'},
+  {emoji:'🍨', name:'Ice Cream Sundae', price:119, cat:'dessert'},
+];
+let cart = {};
+
+function renderOrderList() {
+  const ol = document.getElementById('order-list');
+  ol.innerHTML = menuItems.map((item, i) => `
+    <div class="oi-item">
+      <div class="oi-emoji">${item.emoji}</div>
+      <div class="oi-info">
+        <div class="oi-name">${item.name}</div>
+        <div class="oi-price">₹${item.price}</div>
+      </div>
+      <div class="oi-qty">
+        <button class="qty-btn" onclick="updateCart(${i},-1)">−</button>
+        <span class="qty-num" id="qty-${i}">${cart[i]||0}</span>
+        <button class="qty-btn" onclick="updateCart(${i},1)">+</button>
+      </div>
+    </div>
+  `).join('');
+  renderCart();
+}
+
+function updateCart(idx, delta) {
+  cart[idx] = Math.max(0, (cart[idx] || 0) + delta);
+  const el = document.getElementById('qty-' + idx);
+  if (el) el.textContent = cart[idx];
+  if (cart[idx] === 0) delete cart[idx];
+  renderCart();
+}
+
+function renderCart() {
+  const cd = document.getElementById('cart-display');
+  const tr = document.getElementById('cart-total-row');
+  const tv = document.getElementById('cart-total-val');
+  const keys = Object.keys(cart);
+  if (keys.length === 0) {
+    cd.innerHTML = '<div class="cart-empty">No items added yet. Select from the menu!</div>';
+    tr.style.display = 'none';
+    return;
+  }
+  let total = 0;
+  cd.innerHTML = keys.map(i => {
+    const item = menuItems[i];
+    const subtotal = item.price * cart[i];
+    total += subtotal;
+    return `<div class="cart-item"><span class="cart-item-name">${item.emoji} ${item.name} ×${cart[i]}</span><span class="cart-item-price">₹${subtotal}</span></div>`;
+  }).join('');
+  tr.style.display = 'flex';
+  tv.textContent = '₹' + total;
+}
+
+function buildOrderText() {
+  const name = document.getElementById('ord-name').value || 'Customer';
+  const phone = document.getElementById('ord-phone').value || '-';
+  const addr = document.getElementById('ord-addr').value || '-';
+  const type = document.getElementById('ord-type').value;
+  const pay = document.getElementById('ord-pay').value;
+  const notes = document.getElementById('ord-notes').value || 'None';
+  const keys = Object.keys(cart);
+  if (!keys.length) { alert('Please add at least one item to your order!'); return null; }
+  let items = '', total = 0;
+  keys.forEach(i => {
+    const item = menuItems[i];
+    const sub = item.price * cart[i];
+    total += sub;
+    items += `${item.name} x${cart[i]} = ₹${sub}\n`;
+  });
+  return { name, phone, addr, type, pay, notes, items, total };
+}
+
+function placeOrderEmail() {
+  const o = buildOrderText(); if (!o) return;
+  const email = document.getElementById('ord-email').value;
+  const subject = encodeURIComponent('New Order from ' + o.name + ' — Crispy Cafe Website');
+  const body = encodeURIComponent(`New Order Request\n\nCustomer: ${o.name}\nPhone: ${o.phone}\nEmail: ${email}\nOrder Type: ${o.type}\nPayment: ${o.pay}\nAddress: ${o.addr}\n\nItems:\n${o.items}\nTotal: ₹${o.total}\n\nSpecial Notes: ${o.notes}`);
+  window.location.href = `mailto:Kaifsiddiqui28637@gmail.com?subject=${subject}&body=${body}`;
+  document.getElementById('order-success').style.display = 'block';
+}
+
+function placeOrderWA() {
+  const o = buildOrderText(); if (!o) return;
+  const msg = encodeURIComponent(`🍕 *New Order — Crispy Cafe*\n\n👤 Name: ${o.name}\n📞 Phone: ${o.phone}\n📍 Address: ${o.addr}\n🛵 Type: ${o.type}\n💳 Payment: ${o.pay}\n\n*Items:*\n${o.items}\n💰 *Total: ₹${o.total}*\n\n📝 Notes: ${o.notes}`);
+  window.open('https://wa.me/919634950165?text=' + msg, '_blank');
+  document.getElementById('order-success').style.display = 'block';
+}
+
+// ===== CONTACT FORM =====
+function sendContact() {
+  const name = document.getElementById('cn-name').value || 'Guest';
+  const phone = document.getElementById('cn-phone').value || '-';
+  const email = document.getElementById('cn-email').value;
+  const subject = document.getElementById('cn-subject').value;
+  const msg = document.getElementById('cn-msg').value;
+  const subj = encodeURIComponent(subject + ' — Crispy Cafe Contact Form');
+  const body = encodeURIComponent(`From: ${name}\nPhone: ${phone}\nEmail: ${email}\n\nMessage:\n${msg}`);
+  window.location.href = `mailto:Kaifsiddiqui28637@gmail.com?subject=${subj}&body=${body}`;
+  document.getElementById('contact-success').style.display = 'block';
+}
+
+function sendWA() {
+  const name = document.getElementById('cn-name').value || 'Customer';
+  const msg = document.getElementById('cn-msg').value || 'Hello!';
+  const text = encodeURIComponent(`Hi Crispy Cafe! 👋\n\nName: ${name}\nMessage: ${msg}`);
+  window.open('https://wa.me/919634950165?text=' + text, '_blank');
+}
+
+// ===== ENQUIRY FORMS =====
+function sendEnquiry(type) {
+  let subject, body;
+  if (type === 'table') {
+    const name = document.getElementById('et-name').value || 'Guest';
+    const phone = document.getElementById('et-phone').value || '-';
+    const date = document.getElementById('et-date').value;
+    const time = document.getElementById('et-time').value;
+    const guests = document.getElementById('et-guests').value;
+    const occ = document.getElementById('et-occ').value;
+    const req = document.getElementById('et-req').value || 'None';
+    subject = encodeURIComponent('Table Booking Request — ' + name);
+    body = encodeURIComponent(`Table Booking Request\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${time}\nGuests: ${guests}\nOccasion: ${occ}\nSpecial Requests: ${req}`);
+  } else if (type === 'catering') {
+    const name = document.getElementById('ec-name').value || 'Guest';
+    const phone = document.getElementById('ec-phone').value;
+    const email = document.getElementById('ec-email').value;
+    const date = document.getElementById('ec-date').value;
+    const guests = document.getElementById('ec-guests').value;
+    const event = document.getElementById('ec-event').value;
+    const details = document.getElementById('ec-details').value;
+    subject = encodeURIComponent('Catering Enquiry — ' + name);
+    body = encodeURIComponent(`Catering Enquiry\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nEvent Date: ${date}\nGuests: ${guests}\nEvent Type: ${event}\nDetails: ${details}`);
+  } else {
+    const name = document.getElementById('ef-name').value || 'Guest';
+    const text = document.getElementById('ef-text').value;
+    subject = encodeURIComponent('Customer Feedback — ' + name);
+    body = encodeURIComponent(`Feedback from: ${name}\n\n${text}`);
+  }
+  window.location.href = `mailto:Kaifsiddiqui28637@gmail.com?subject=${subject}&body=${body}`;
+  document.getElementById('enq-success').style.display = 'block';
+}
+
+function sendWAEnquiry(type) {
+  let text;
+  if (type === 'table') {
+    const name = document.getElementById('et-name').value || 'Customer';
+    const date = document.getElementById('et-date').value;
+    const guests = document.getElementById('et-guests').value;
+    text = encodeURIComponent(`🪑 *Table Booking — Crispy Cafe*\n\nName: ${name}\nDate: ${date}\nGuests: ${guests}\n\nPlease confirm my booking!`);
+  } else {
+    const name = document.getElementById('ec-name').value || 'Customer';
+    const guests = document.getElementById('ec-guests').value;
+    text = encodeURIComponent(`🍽️ *Catering Enquiry — Crispy Cafe*\n\nName: ${name}\nGuests: ${guests}\n\nI'd like catering details please!`);
+  }
+  window.open('https://wa.me/919634950165?text=' + text, '_blank');
+}
+
+// Init
+renderOrderList();
+</script>
+</body>
+</html>
